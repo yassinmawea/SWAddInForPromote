@@ -1,0 +1,31 @@
+
+    # Version control definition file
+    # Version: Base Version: 1
+    
+
+    set CurrentlyExecutedAdminObject [mql get env CURRENT_EXECUTION]
+    
+    switch -exact $CurrentlyExecutedAdminObject {
+        type {
+            # The below variable name must be lCommandList - do not change it
+            set lCommandList [ list $lList_Modify_type_SWComponentInstance \
+                                    $lList_Modify_type_SWAssemblyInstance \
+									$lList_Modify_type_SWDrawing \
+									
+                            ]
+        }
+		eServiceTriggerProgramParameters {
+            # The below variable name must be lCommandList - do not change it
+                set lCommandList [ list $lList_TypeSWCheckinAction \
+										$lList_ActivateTypeSWCheckinAction \
+                                 ]
+        }
+        default {
+        }
+    }
+
+
+    
+         
+
+         

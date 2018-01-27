@@ -1,0 +1,75 @@
+Below is the attribute mapping to be added to SW GCO.
+Append the value below to attribute MCADInteg-CADtoMXAttrMapping.
+
+MCADIteg-CADtoMXAttrMapping : 
+assemblyFamily,Material|SW Assembly Family,INV_Material
+assemblyFamily,MakeOrBuy|SW Assembly Family,INV_MakeOrBuy
+assemblyFamily,Category|SW Assembly Family,INV_Category
+assemblyFamily,Fabrication Type|SW Assembly Family,INV_FabricationType
+assemblyFamily,Geometry|SW Assembly Family,INV_Geometry
+assemblyFamily,Blank Size|SW Assembly Family,INV_BlankSize
+assemblyFamily,Blank Weight|SW Assembly Family,INV_BlankWeight
+assemblyFamily,Weight|SW Assembly Family,INV_NetWeight
+assemblyFamily,Cost - Total Cost|SW Assembly Family,INV_FinalCost
+assemblyFamily,Costing Template|SW Assembly Family,INV_CostTemplateRevision
+assemblyFamily,Finish|SW Assembly Family,INV_Finishing
+
+assemblyInstance,Material|SW Assembly Instance,INV_Material
+assemblyInstance,MakeOrBuy|SW Assembly Instance,INV_MakeOrBuy
+assemblyInstance,Category|SW Assembly Instance,INV_Category
+assemblyInstance,Fabrication Type|SW Assembly Instance,INV_FabricationType
+assemblyInstance,Geometry|SW Assembly Instance,INV_Geometry
+assemblyInstance,Blank Size|SW Assembly Instance,INV_BlankSize
+assemblyInstance,Blank Weight|SW Assembly Instance,INV_BlankWeight
+assemblyInstance,Weight|SW Assembly Instance,INV_NetWeight
+assemblyInstance,Cost - Total Cost|SW Assembly Instance,INV_FinalCost
+assemblyInstance,Costing Template|SW Assembly Instance,INV_CostTemplateRevision
+assemblyInstance,Finish|SW Assembly Instance,INV_Finishing
+
+assembly,Material|SW Assembly,INV_Material
+assembly,MakeOrBuy|SW Assembly,INV_MakeOrBuy
+assembly,Category|SW Assembly,INV_Category
+assembly,Fabrication Type|SW Assembly,INV_FabricationType
+assembly,Geometry|SW Assembly,INV_Geometry
+assembly,Blank Size|SW Assembly,INV_BlankSize
+assembly,Blank Weight|SW Assembly,INV_BlankWeight
+assembly,Weight|SW Assembly,INV_NetWeight
+assembly,Cost - Total Cost|SW Assembly,INV_FinalCost
+assembly,Costing Template|SW Assembly,INV_CostTemplateRevision
+assembly,Finish|SW Assembly,INV_Finishing
+
+component,Material|SW Component,INV_Material
+component,MakeOrBuy|SW Component,INV_MakeOrBuy
+component,Category|SW Component,INV_Category
+component,Fabrication Type|SW Component,INV_FabricationType
+component,Geometry|SW Component,INV_Geometry
+component,Blank Size|SW Component,INV_BlankSize
+component,Blank Weight|SW Component,INV_BlankWeight
+component,Weight|SW Component,INV_NetWeight
+component,Cost - Total Cost|SW Component,INV_FinalCost
+component,Costing Template|SW Component,INV_CostTemplateRevision
+component,Finish|SW Component,INV_Finishing
+
+componentInstance,Material|SW Component Instance,INV_Material
+componentInstance,MakeOrBuy|SW Component Instance,INV_MakeOrBuy
+componentInstance,Category|SW Component Instance,INV_Category
+componentInstance,Fabrication Type|SW Component Instance,INV_FabricationType
+componentInstance,Geometry|SW Component Instance,INV_Geometry
+componentInstance,Blank Size|SW Component Instance,INV_BlankSize
+componentInstance,Blank Weight|SW Component Instance,INV_BlankWeight
+componentInstance,Weight|SW Component Instance,INV_NetWeight
+componentInstance,Cost - Total Cost|SW Component Instance,INV_FinalCost
+componentInstance,Costing Template|SW Component Instance,INV_CostTemplateRevision
+componentInstance,Finish|SW Component Instance,INV_Finishing
+
+componentFamily,Material|SW Component Family,INV_Material
+componentFamily,MakeOrBuy|SW Component Family,INV_MakeOrBuy
+componentFamily,Category|SW Component Family,INV_Category
+componentFamily,Fabrication Type|SW Component Family,INV_FabricationType
+componentFamily,Geometry|SW Component Family,INV_Geometry
+componentFamily,Blank Size|SW Component Family,INV_BlankSize
+componentFamily,Blank Weight|SW Component Family,INV_BlankWeight
+componentFamily,Weight|SW Component Family,INV_NetWeight
+componentFamily,Cost - Total Cost|SW Component Family,INV_FinalCost
+componentFamily,Costing Template|SW Component Family,INV_CostTemplateRevision
+componentFamily,Finish|SW Component Family,INV_Finishing
