@@ -163,7 +163,7 @@ Public Class SWAddInForPromote
         Debug.Print("P Count --> " & p.Count)
         If p.Count = 0 Then
             checkinFromExplorer = True
-            myProcess.StartInfo.FileName = "C:\Program Files\SOLIDWORKS Corp\SOLIDWORKS (2)\SLDWORKS.exe"
+            myProcess.StartInfo.FileName = "C:\Program Files\SOLIDWORKS Corp\SOLIDWORKS\SLDWORKS.exe"
             myProcess.Start()
             Threading.Thread.Sleep(10000)
         End If
@@ -172,7 +172,7 @@ Public Class SWAddInForPromote
         Debug.Print("Searching swApp")
         Do
             Debug.Print("In Do Loop")
-            swApp = CType(System.Runtime.InteropServices.Marshal.GetActiveObject("SldWorks.Application.25"), SldWorks)
+            swApp = Marshal.GetActiveObject("SldWorks.Application.25")
             'Thread.Sleep(3000)
             Debug.Print("Checking swApp")
         Loop While (swApp Is Nothing)
@@ -266,7 +266,7 @@ Public Class SWAddInForPromote
             Debug.Print("rev --> " + parser(1))
 
             jpo = server.CreateUtility(EnoObjectType.EnoObj_EnoJPO)
-            result = jpo.Execute("INV_SWDerivedOutputJPO", "createConnectDerivedOutput", parser)
+            result = jpo.Execute("INV_ReleaseDerivedOutputJPO", "createConnectDerivedOutput", parser)
 
         Catch e As Exception
             MsgBox(Err.Description)
