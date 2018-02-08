@@ -266,7 +266,7 @@ Public Class SWAddInForPromote
             Debug.Print("rev --> " + parser(1))
 
             jpo = server.CreateUtility(EnoObjectType.EnoObj_EnoJPO)
-            result = jpo.Execute("INV_ReleaseDerivedOutputJPO", "createConnectDerivedOutput", parser)
+            result = jpo.Execute("INV_SWDerivedOutputJPO", "createConnectDerivedOutput", parser)
 
         Catch e As Exception
             MsgBox(Err.Description)
