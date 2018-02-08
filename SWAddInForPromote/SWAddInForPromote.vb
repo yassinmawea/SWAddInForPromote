@@ -163,7 +163,7 @@ Public Class SWAddInForPromote
         Debug.Print("P Count --> " & p.Count)
         If p.Count = 0 Then
             checkinFromExplorer = True
-            myProcess.StartInfo.FileName = "C:\Program Files\SOLIDWORKS Corp\SOLIDWORKS (2)\SLDWORKS.exe"
+            myProcess.StartInfo.FileName = "C:\Program Files\SOLIDWORKS Corp2017\SOLIDWORKS (2)\SLDWORKS.exe"
             myProcess.Start()
             Threading.Thread.Sleep(10000)
         End If
@@ -172,7 +172,7 @@ Public Class SWAddInForPromote
         Debug.Print("Searching swApp")
         Do
             Debug.Print("In Do Loop")
-            swApp = CType(System.Runtime.InteropServices.Marshal.GetActiveObject("SldWorks.Application.25"), SldWorks)
+            swApp = Marshal.GetActiveObject("SldWorks.Application.25")
             'Thread.Sleep(3000)
             Debug.Print("Checking swApp")
         Loop While (swApp Is Nothing)
@@ -192,7 +192,7 @@ Public Class SWAddInForPromote
             swModel = swApp.OpenDoc6(path, swDocumentTypes_e.swDocPART, swOpenDocOptions_e.swOpenDocOptions_Silent, "", iErrors, iWarnings)
             swModel = swApp.ActivateDoc3(filenameFull, False, swRebuildOnActivation_e.swDontRebuildActiveDoc, iErrors)
             Debug.Print("what model? -> " & swModel.GetPathName)
-            boolstatus = swApp.RunMacro("C:\Program Files\SolidWorks Corp\SWAddInForCheckIn\Sync1.swp", "Sync11", "main")
+            boolstatus = swApp.RunMacro("C:\Program Files\SolidWorks Corp2017\SWAddInForCheckIn\Sync1.swp", "Sync11", "main")
             swApp.QuitDoc("")
         Next
 
@@ -208,7 +208,7 @@ Public Class SWAddInForPromote
             swModel = swApp.OpenDoc6(path, swDocumentTypes_e.swDocASSEMBLY, swOpenDocOptions_e.swOpenDocOptions_Silent, "", iErrors, iWarnings)
             swModel = swApp.ActivateDoc3(filenameFull, False, swRebuildOnActivation_e.swDontRebuildActiveDoc, iErrors)
             Debug.Print("what model? -> " & swModel.GetPathName)
-            boolstatus = swApp.RunMacro("C:\Program Files\SolidWorks Corp\SWAddInForCheckIn\Sync1.swp", "Sync11", "main")
+            boolstatus = swApp.RunMacro("C:\Program Files\SolidWorks Corp2017\SWAddInForCheckIn\Sync1.swp", "Sync11", "main")
             swApp.QuitDoc("")
         Next
 
@@ -223,10 +223,10 @@ Public Class SWAddInForPromote
             swModel = swApp.OpenDoc6(path, swDocumentTypes_e.swDocDRAWING, swOpenDocOptions_e.swOpenDocOptions_Silent, "", iErrors, iWarnings)
             swModel = swApp.ActivateDoc3(filenameFull, False, swRebuildOnActivation_e.swDontRebuildActiveDoc, iErrors)
             Debug.Print("what model? -> " & swModel.GetPathName)
-            boolstatus = swApp.RunMacro("C:\Program Files\SolidWorks Corp\SWAddInForCheckIn\Sync1.swp", "Sync11", "main")
+            boolstatus = swApp.RunMacro("C:\Program Files\SolidWorks Corp2017\SWAddInForCheckIn\Sync1.swp", "Sync11", "main")
 
             ' Macro to generate the PDF to the temp folder
-            boolstatus = swApp.RunMacro2("C:\Program Files\SolidWorks Corp\swAddInForCheckIn\PDFDXFMacro_Alt.swp", "Personal11", "main", swRunMacroOption_e.swRunMacroUnloadAfterRun, iErrors)
+            boolstatus = swApp.RunMacro2("C:\Program Files\SolidWorks Corp2017\swAddInForCheckIn\PDFDXFMacro_Alt.swp", "Personal11", "main", swRunMacroOption_e.swRunMacroUnloadAfterRun, iErrors)
 
             ' Invoke JPO to upload PDF and DXF to server
             UploadPDFDXFtoENOVIA(server, item)
@@ -266,7 +266,7 @@ Public Class SWAddInForPromote
             Debug.Print("rev --> " + parser(1))
 
             jpo = server.CreateUtility(EnoObjectType.EnoObj_EnoJPO)
-            result = jpo.Execute("INV_SWDerivedOutputJPO", "createConnectDerivedOutput", parser)
+            result = jpo.Execute("INV_ReleaseDerivedOutputJPO", "createConnectDerivedOutput", parser)
 
         Catch e As Exception
             MsgBox(Err.Description)
