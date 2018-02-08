@@ -42,6 +42,16 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ForRelease2017|AnyCPU'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\ForRelease2017\</OutputPath>
+    <DocumentationFile>SWAddInForPromote.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="SolidWorks.Interop.sldworks">
       <HintPath>C:\Program Files\SolidWorks Corp\SOLIDWORKS (2)\api\redist\CLR2\SolidWorks.Interop.sldworks.dll</HintPath>
