@@ -172,7 +172,7 @@ Public Class SWAddInForPromote
         Debug.Print("Searching swApp")
         Do
             Debug.Print("In Do Loop")
-            swApp = Marshal.GetActiveObject("SldWorks.Application.25")
+            swApp = CType(System.Runtime.InteropServices.Marshal.GetActiveObject("SldWorks.Application"), SldWorks)
             'Thread.Sleep(3000)
             Debug.Print("Checking swApp")
         Loop While (swApp Is Nothing)
