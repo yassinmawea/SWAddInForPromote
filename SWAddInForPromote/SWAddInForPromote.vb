@@ -36,6 +36,7 @@ Public Class SWAddInForPromote
         Dim listOfComponents As IEnoSelection = New EnoSelection
         Dim listOfAssembly As IEnoSelection = New EnoSelection
         Dim listOfDrawings As IEnoSelection = New EnoSelection
+        Dim listAll As IEnoSelection = New EnoSelection
 
         Debug.Print("Im in now!")
 
@@ -56,6 +57,7 @@ Public Class SWAddInForPromote
             ' Classify list based on types for better performance.
             If String.Compare(item.GetProperty(EnoSelItemProp.Enospi_StateCurrent), "Frozen") = 0 Then
                 Debug.Print(item.GetProperty(EnoSelItemProp.Enospi_Name) & " is in Frozen state")
+                listAll.AddItem(item)
                 Select Case True
                     Case Type.Contains("Component")
                         Debug.Print(Type & " is added to List")
@@ -74,11 +76,14 @@ Public Class SWAddInForPromote
 
         Next
 
-        RunProgram(poCmd, listOfComponents, listOfAssembly, listOfDrawings)
+
+
+        ' Run Main Program
+        RunProgram(poCmd, listOfComponents, listOfAssembly, listOfDrawings, listAll)
 
     End Sub
 
-    Async Sub RunProgram(ByVal poCmd As IEnoCmd, ByVal listOfComponents As IEnoSelection, ByVal listOfAssembly As IEnoSelection, ByVal listOfDrawings As IEnoSelection)
+    Async Sub RunProgram(ByVal poCmd As IEnoCmd, ByVal listOfComponents As IEnoSelection, ByVal listOfAssembly As IEnoSelection, ByVal listOfDrawings As IEnoSelection, ByVal listAll As IEnoSelection)
 
         Dim t1 As Thread
         Dim t2 As Thread
@@ -90,7 +95,7 @@ Public Class SWAddInForPromote
 
             'Start ProgressMessage thread while also running MainProgram
             t1.Start()
-            Await Task.Run(Sub() MainProgram(poCmd, listOfComponents, listOfAssembly, listOfDrawings))
+            Await Task.Run(Sub() MainProgram(poCmd, listOfComponents, listOfAssembly, listOfDrawings, listAll))
 
             'Abort ProgressMessage upon completing MainProgram
             t1.Abort()
@@ -130,7 +135,7 @@ Public Class SWAddInForPromote
     ''' 
     ''' </summary>
     ''' <param name="poCmd"></param>
-    Sub MainProgram(ByVal poCmd As IEnoCmd, ByVal listOfComponents As IEnoSelection, ByVal listOfAssembly As IEnoSelection, ByVal listOfDrawings As IEnoSelection)
+    Sub MainProgram(ByVal poCmd As IEnoCmd, ByVal listOfComponents As IEnoSelection, ByVal listOfAssembly As IEnoSelection, ByVal listOfDrawings As IEnoSelection, ByVal listAll As IEnoSelection)
         On Error Resume Next
         Dim sel As IEnoSelection
         Dim item As IEnoSelectionItem
@@ -177,6 +182,9 @@ Public Class SWAddInForPromote
             Debug.Print("Checking swApp")
         Loop While (swApp Is Nothing)
         swApp.UserControl = False
+
+        ' Get all drawing/components/assembly that is not in local
+        GetLatestIteration(listAll, server)
 
         'Iterate Components and sync
         For Each item In listOfComponents
@@ -232,7 +240,18 @@ Public Class SWAddInForPromote
             UploadPDFDXFtoENOVIA(server, item)
         Next
 
+        ' Close all document including unsaved documents
+        swApp.CloseAllDocuments(True)
 
+        ' Clear Local Cache for all the parts/assembly in the selection list
+        ClearLocalCache(sel, server)
+
+        swApp.UserControl = True
+
+        ' If SW was not opened in the first place, then  close SW.
+        If checkinFromExplorer = True Then
+            myProcess.Kill()
+        End If
 
     End Sub
 
@@ -384,5 +403,27 @@ Public Class SWAddInForPromote
         Return filenameFull
 
     End Function
+
+    Sub ClearLocalCache(ByVal selection As IEnoSelection, ByVal server As IEnoServer)
+        Dim clc As IEnoClearLocalCache
+
+        clc = server.CreateUtility(EnoObjectType.EnoObj_EnoClearLocalCache)
+        clc.AddSelection(selection)
+        clc.IgnoreToolboxFiles = True
+        clc.Commit()
+
+    End Sub
+
+    Sub GetLatestIteration(ByVal selection As IEnoSelection, ByVal server As IEnoServer)
+        Dim gli As IEnoBatchGet
+
+        Debug.Print("In GetLatestIteration")
+        gli = server.CreateUtility(EnoObjectType.EnoObj_EnoBatchGet)
+        gli.AddSelection(selection)
+        gli.Prepare(0, EnoGetFlags.EnoGet_RefreshFileListing)
+        gli.Commit(0)
+        Debug.Print("After Commit")
+
+    End Sub
 
 End Class

@@ -68,7 +68,7 @@ set lList_Modify_type_SWAssemblyInstance \
                    {version=R417} \
                    {property=type_SWAssemblyInstance} \
                    {name=SW Assembly Instance} \
-                   {query=mql mod type "SW Assembly Family" add attribute "INV_Revision";} \
+                   {query=mql mod type "SW Assembly Instance" add attribute "INV_Revision";} \
               ]
 #-------------------------------------------------------------------------
 #-------------------------------------------------------------------------

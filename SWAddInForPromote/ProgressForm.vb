@@ -44,7 +44,7 @@
                     currentValue = 0
                 End If
 
-            Loop Until currentValue = 98
+            Loop Until Not Visible
 
         Catch ex As Exception
             Close()
