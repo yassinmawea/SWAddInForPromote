@@ -238,10 +238,12 @@ Public Class SWAddInForPromote
 
             ' Invoke JPO to upload PDF and DXF to server
             UploadPDFDXFtoENOVIA(server, item)
+
+            swApp.CloseDoc(swModel.GetTitle)
         Next
 
         ' Close all document including unsaved documents
-        swApp.CloseAllDocuments(True)
+        'swApp.CloseAllDocuments(True)
 
         ' Clear Local Cache for all the parts/assembly in the selection list
         ClearLocalCache(sel, server)
